@@ -1,0 +1,34 @@
+.tabs{
+	background-color: black;
+ 
+	
+	}
+.parentTab {
+	 
+	cursor: pointer;
+	border: 1px solid blue;
+	width: 100%;
+	text-decoration: none;
+	font-size: large;
+	text-align: center;
+	background-color: white;
+}
+
+.children{
+	display: none;
+	}
+.childTab {
+	   text-align: center;
+	  font-size: small;
+	
+	
+	 
+}
+.childTab a{
+color: white;
+     
+
+}
+img{
+border:0;
+}

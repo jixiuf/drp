@@ -1,0 +1,39 @@
+struts2 上传
+struts.xml
+    <constant name="struts.multipart.saveDir" value="c:\a" />
+    a.jsp
+<input name='theNameOfUploadField' type='file'>
+
+
+class UAction extends ActionSupport {
+  private File theNameOfUploadField;
+      private String contentType;
+      private String filename;
+
+      public void setTheNameOfUploadField(File file) {
+         this.file = file;
+      }
+
+      public void setTheNameOfUploadContentType(String contentType) {
+         this.contentType = contentType;
+      }
+
+      public void setTheNameOfUploadFileName(String filename) {
+         this.filename = filename;
+      }
+
+      public String execute() {
+      theNameOfUploadField.reNameto(newFile);
+      print(filename);
+      
+       
+         return SUCCESS;
+      }
+
+
+
+}
+
+
+ServletContextAware  或者ServletActionContext.staticMethod 获得项目的真实路径，将上传后的图片存进来，而在jsp 中则直接访问
+其中的文件（利用File.reName(new File())）

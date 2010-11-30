@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <base href="http://127.0.0.1:8888/drp/">
+
+        <title>My JSP 'distrib_tree.jsp' starting page</title>
+
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta http-equiv="expires" content="0">    
+        <link rel="stylesheet" type="text/css" href="css/dtree.css">
+
+        <script type='text/javascript'  src='js/dom_dtree.js'></script>
+
+<!-- 要放到服务器端后才能正常运行（好像是） -->
+        <script type='text/javascript' >
+
+        //dTree变量要声明为全局变量，且参数与变量名要相同如此处的d
+            var d = new dTree("d");
+            function test(){
+                //-1 表示根节点的根节点 
+                 //<a href='a.jsp' target='_self' title='title'>    true 表示默认情况下此节点是open 的(如果不是叶子节点)
+	            d.add('1', null , 'name', 'a.jsp', 'title', '_self',true);
+	            d.add('2', '1', 'name2', 'a.jsp', 'title', '_self', true);
+	            d.add('3', '1', 'name3', 'a.jsp', 'title', '_self', true);
+	            d.add('4', '2', 'name4', 'a.jsp', 'title', '_self', true);
+	            d.add('5', '2', 'name5', 'a.jsp', 'title', '_self', true);
+	            d.add('6', '3', 'name5', 'a.jsp', 'title', '_self', true);
+	            d.add('7', '3', 'name5', 'a.jsp', 'title', '_self', true);
+	           
+	            var show=document.getElementById("distrib_tree") ;
+	            show.appendChild(d.toDOMElement());
+	                //或者 show.innerHTML=d.toString();
+	            
+            }
+
+        </script>
+
+    </head>
+
+    <body>
+        <input type='button' onclick="test()" >
+        <div id='distrib_tree'>a</div>
+    </body>
+
+</html>
+

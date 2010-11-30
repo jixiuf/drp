@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="true" />
+
+
+	<include file="struts-default.xml" />
+
+	<package name="jixiuf_defalut" namespace="/" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="loginCheck"
+				class="org.jixiuf.interceptor.LoginCheckInterceptor" />
+			<interceptor-stack name="myDefaultStack">
+				<interceptor-ref name="loginCheck" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myDefaultStack" />
+		<global-results>
+			<result name="error">
+				/error.jsp
+            </result>
+
+
+			<result name="login">/user/login.jsp
+            </result>
+
+
+		</global-results>
+		<global-exception-mappings>
+
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+	</package>
+	<package name="user" namespace="/user" extends="jixiuf_defalut">
+		<action name="user" class="userAction">
+
+			<result name="listUser">/user/listUser.jsp
+            </result>
+			<result name="modUser">/user/modUser.jsp
+            </result>
+			<result name="modUserSuccess" type="redirect">
+				${dynamicURL}
+				<!--
+					${dynamicURL}= /user/user!listUser?+pageMOdelQueryStr
+				-->
+			</result>
+
+			<result name="success">/user/addUserSuccess.jsp
+			</result>
+			<result name="addUserFailure">/user/addUser.jsp
+            </result>
+			<result name="checkEmailExistsSuccess">/user/checkEmailExistsSuccess.jsp
+			</result>
+			<result name="checkEmailExistsFailure">/user/checkEmailExistsFailure.jsp
+			</result>
+
+		</action>
+	</package>
+	<!-- 基础数据维护 -->
+	<package name="basedata" namespace="/basedata" extends="jixiuf_defalut">
+
+
+		<!-- 会计核算期维护 -->
+		<action name="fiscalPeriod" class="fiscalPeriodAction">
+			<result name="listFiscalPeriod_jsp">/basedata/fiscal/fiscal_period.jsp
+			</result>
+			<result type="chain" name="listFiscalPeriod">
+				<param name="actionName">fiscalPeriod</param>
+				<param name="method ">listFiscalPeriod</param>
+			</result>
+			<result name="modFiscalPeriod_jsp">
+				/basedata/fiscal/fiscal_period_mod.jsp 
+            </result>
+
+			<result name="addFiscalPeriod_jsp">
+				/basedata/fiscal/fiscal_period_add.jsp
+            </result>
+
+		</action>
+		<!-- 分销商与终端客户类型的管理Action  -->
+		<action name="distrib" class="distribAction">
+			<result name="distrib_main_jsp">/basedata/distrib/distrib_main.jsp
+			</result>
+
+			<result name="distrib_list_tree_jsp">
+				/basedata/distrib/distrib_tree.jsp
+            </result>
+
+			<result name="distrib_add_jsp">
+				/basedata/distrib/distrib_add.jsp
+            </result>
+			<result name="distrib_mod_jsp">
+				/basedata/distrib/distrib_mod.jsp
+            </result>
+			<result name="region_main_jsp">
+				/basedata/distrib/region_main.jsp
+            </result>
+			<result name="success">
+				/basedata/distrib/success.jsp
+            </result>
+			<result name="distrib_detail_jsp">
+				/basedata/distrib/distrib_detail.jsp
+            </result>
+
+
+		</action>
+		<action name="material" class="materialAction">
+			<result name="material_main_jsp">
+				/basedata/material/material_main.jsp
+            </result>
+			<result name="material_add_jsp">
+				/basedata/material/material_add.jsp
+            </result>
+			<result name="material_mod_jsp">
+				/basedata/material/material_mod.jsp
+            </result>
+			<result name="material_copy_jsp">
+				/basedata/material/material_copy.jsp
+            </result>
+			<result name="material_upload_jsp">
+				/basedata/material/material_upload.jsp
+                </result>
+			<result name="material_detail_jsp">
+				/basedata/material/material_detail.jsp 
+                </result>
+			<result name="material_search_result_jsp">
+				/basedata/material/material_search_result.jsp
+			</result>
+
+		</action>
+	</package>
+	<package name="inventory" namespace="/inventory" extends="jixiuf_defalut">
+
+		<action name="inventory" class="inventoryAction">
+
+			<result name="inventory_init_jsp">/inventory/inventory_init.jsp
+            </result>
+
+			<result name="distrib_search_jsp">/inventory/distrib_search.jsp
+            </result>
+			<result name="distrib_search_result_jsp">/inventory/distrib_search_result.jsp
+            </result>
+
+
+			<result name="material_search_jsp">/inventory/material_search.jsp
+            </result>
+			<result name="material_search_result_jsp">/inventory/material_search_result.jsp
+            </result>
+			<result name="fiscalPeriod_search_jsp">/inventory/fiscalPeriod_search.jsp
+            </result>
+			<result name="fiscalPeriod_search_result_jsp">/inventory/fiscalPeriod_search_result.jsp
+			</result>
+
+
+
+
+			<result name="inventory_init_search_result_jsp">/inventory/inventory_init_search_result.jsp
+			</result>
+			<result name="inventory_init_add_success_jsp">/inventory/inventory_init_detail.jsp
+            </result>
+			<result name="inventory_init_add_jsp">/inventory/inventory_init_add.jsp
+            </result>
+			<result name="inventory_init_mod_jsp">/inventory/inventory_init_mod.jsp
+            </result>
+
+			<result name='inventory_confirm_jsp'>/inventory/inventory_confirm.jsp</result>
+		</action>
+		<action name="flowcard" class="flowcardAction">
+
+			<result name="flowcard_list_jsp">/inventory/flowcard_main.jsp
+            </result>
+			<result name="flowcard_search_result_jsp">/inventory/flowcard_search_result.jsp
+            </result>
+			<result name="flowcard_detail_show_jsp">/inventory/flowcard_detail_show.jsp
+            </result>
+			<result name="client_select_jsp">/inventory/client_select.jsp
+            </result>
+			<result name="client_search_result_jsp">/inventory/client_search_result.jsp
+            </result>
+			<result name="flowcard_add_jsp">/inventory/flowcard_add.jsp
+            </result>
+			<result name="flowcard_mod_jsp">/inventory/flowcard_mod.jsp
+            </result>
+			<result name="flowcard_add_jsp">/inventory/flowcard_add.jsp
+            </result>
+			<result name="flowcard_adjust_jsp">/inventory/flowcard_adjust.jsp
+            </result>
+			<result name="flowcard_adjust_detail_jsp">/inventory/flowcard_adjust_detail.jsp
+            </result>
+			<result name="flowcard_spot_jsp">/inventory/flowcard_spot.jsp
+            </result>
+			<result name="flowcard_spot_detail_jsp">/inventory/flowcard_spot_detail.jsp
+            </result>
+			<result name="flowcard_search_result_spot_jsp">/inventory/flowcard_search_result_spot.jsp
+			</result>
+			<result name="flowcard_fushen_jsp">/inventory/flowcard_fushen.jsp
+            </result>
+		</action>
+
+
+	</package>
+	<package name="report" namespace="/report" extends="jixiuf_defalut">
+		<action name="report" class="reportAction">
+			<result name="distribLevel_jsp">
+				/report/distribLevel.jsp
+ </result>
+			<result name="region_list_children_jsp">
+				/report/region_list_children.jsp
+ </result>
+			<result   type="stream"   name="distribLevel_detail_jpg">
+				<param name="contentType">image/jpeg</param>
+				<!-- 指定提供InputStream的filed name -->
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+				<result   type="stream"   name="distribLevel_detail_doc">
+				<param name="contentType">application/msword</param>
+				<!-- 指定提供InputStream的filed name -->
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			
+			<result name="flowcard_spot_report_jsp">
+				/report/flowcard_spot_report.jsp
+				</result>
+		</action>
+	</package>
+
+</struts>

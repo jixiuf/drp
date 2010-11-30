@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="compass"
+  id="myeclipse.1264212046406"
+  context-root="/drp"
+  j2ee-spec="5.0"
+  archive="compass.war">
+  <attributes>
+    <attribute name="webrootdir" value="/WebRoot" />
+  </attributes>
+</project-module>
+

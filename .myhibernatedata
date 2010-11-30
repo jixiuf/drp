@@ -1,0 +1,25 @@
+#MyEclipse Hibernate Properties
+#Tue Mar 02 20:31:10 CST 2010
+sessionFactoryName=com.jixiuf.compass.hb.HibernateUtil
+genBasicCompId=true
+profile=
+daoSFId=
+version=3.2
+jndiPath=
+detectM2M=true
+reStrategyClass=
+detectO2O=false
+springDaoFile=
+useJavaTypes=true
+keyGenerator=uuid.hex
+libInstallFolder=WebRoot/WEB-INF/lib
+addLibs2Project=true
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+genAnnotations=true
+reSettingsFile=/drp/hibernate.reveng.xml
+configFile=/compass/src/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=true
+baseDaoClass=BaseHibernateDAO
